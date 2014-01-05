@@ -1,0 +1,17 @@
+<h1>Hello <?php echo $name; ?></h1>
+
+<p>Var1 = <?php echo $var1; ?></p>
+<p>Var2 = <?php echo $var2; ?></p>
+<p>Foo = <?php echo $context->foo; ?></p>
+<hr>
+
+<?php if ($name !== 'Smith') { ?>
+    <?php
+        $context->foo = 'CHANGED FOO (remains)';
+        echo $view->render('hello', array(
+        'name' => 'Smith',
+        'var2' => 'I was changed !'
+    )); ?>
+    <hr>
+    <p>Actual Var2 (back on previous scope) = <?php echo $var2; ?></p>
+<?php } ?>
