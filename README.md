@@ -14,3 +14,36 @@ What does tinyView Handles :
 * Nested rendering
 * Path overriding
 
+Usage :
+=======
+
+```php
+<?php
+    require __DIR__ . '/../src/View.php';
+
+    class context {
+        public $foo = 'foo';
+    }
+
+    // INIT :
+    $view = new \tiny\View(
+        new context()
+        , 'bootstrap' // <-- layout
+    );
+    // CONFIGURE :
+    $view->path(
+        __DIR__ . '/views',
+        __DIR__ . '/layout'
+    );
+
+    // RUN :
+    echo $view->set(array(
+        'title' => 'Hello world', // <-- GLOBAL SCOPE VARS
+        'var1' => 'azerty',
+        'var2' => 'qwerty'
+    ))->respond(
+        'hello' // <-- VIEW
+         , array(
+        'name' => 'John' // <-- VIEW SPECIFIC VAR
+    )); // <-- use the defaut $view->__toString()
+```
